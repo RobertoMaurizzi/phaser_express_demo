@@ -1,0 +1,28 @@
+{
+  "name": "phaser-express",
+  "version": "1.0.0",
+  "description": " Very basic game example made with Phaser and Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazimboudeffa/phaser-express.git"
+  },
+  "keywords": [
+    "Phaser",
+    "Node.js"
+  ],
+  "author": "Jerome Renaux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nazimboudeffa/phaser-express/issues"
+  },
+  "homepage": "https://github.com/nazimboudeffa/phaser-express#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {}
+}
