@@ -1,14 +1,49 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+class scnExample extends Phaser.Scene {
+    constructor() {
+        super('scnExample');
+    }
 
-function preload() {
+    preload() {
+        //Calling the function in PhaserAssetsLoader.php?folder=assets
+        PhaserAssetsLoader_assets(this);
+    }
 
-    game.load.image('dude', 'assets/sprites/phaser-dude.png');
+    create() {
+
+        //Showing images
+        this.add.image(250, 250, 'IMAGE_CIRCLE1');
+        this.add.image(350, 350, 'IMAGE_CIRCLE2');
+
+        //Playing spritesheet
+        this.anims.create({
+            key: 'animeyes',
+            frames: this.anims.generateFrameNumbers('spteyes', { start: 0, end: 8 }),
+            frameRate: 9,
+            repeat: -1
+        });
+        this.add.sprite(50, 50).play('SPRITE_EYES');
+
+        //Playing sound
+        this.sound.play('AUDIO_HORN');
+
+        //Showing bitmap font
+        this.add.bitmapText(100, 50, 'FONT_NINJA', 'Phaser Assets Packer', 32);
+
+        //Showing some html contents (textbox)
+        this.add.dom(350, 350).createFromCache('HTML_FRMNAME');
+
+    }
 
 }
 
-function create() {
+var config = {
+    type: Phaser.AUTO,
+    parent: 'divPhaser',
+    dom: { createContainer: true }, //Important for HTML
+    width: 500,
+    height: 500,
+    scene: scnExample,
 
-    //  This simply creates a sprite using the mushroom image we loaded above and positions it at 200 x 200
-    var test = game.add.sprite(this.world.centerX, this.world.centerY, 'dude');
+};
 
-}
+var game = new Phaser.Game(config);
