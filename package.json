@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "recreate": "node -e 'require(\"./create-phaser-assets\").createPhaserAssets()'"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,10 @@
   },
   "homepage": "https://github.com/nazimboudeffa/phaser-express#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "fast-glob": "^3.2.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.19.0"
+  }
 }
