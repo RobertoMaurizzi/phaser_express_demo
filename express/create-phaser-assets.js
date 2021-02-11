@@ -2,9 +2,7 @@ const path = require('path')
 const fs = require('fs');
 const fg = require('fast-glob')
 
-function createPhaserAssets(assetsRootFolder = 'assets', jsOutputFile = './public/assets/assets.js') {
-
-    const public = './public/'
+function createPhaserAssets(assetsRootFolder = 'assets', jsOutputFile = './dist/assets/assets.js', public = 'src/') {
 
     const assetTypes = {
         image: ["png", "jpg", "jpeg"],

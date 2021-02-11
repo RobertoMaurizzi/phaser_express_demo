@@ -1,0 +1,59 @@
+{
+  "image": [
+    [
+      "IMAGE_circle1",
+      "assets/images/circle1.png"
+    ],
+    [
+      "IMAGE_mario_tiles",
+      "assets/images/mario_tiles.png"
+    ],
+    [
+      "IMAGE_circle2",
+      "assets/images/more/circle2.png"
+    ]
+  ],
+  "audio": [
+    [
+      "AUDIO_horn",
+      "assets/audio/horn.mp3"
+    ]
+  ],
+  "html": [
+    [
+      "HTML_frmName",
+      "assets/htmls/frmName.html"
+    ]
+  ],
+  "bitmapFont": [
+    [
+      "FONT_ninja",
+      [
+        "assets/fonts/ninja.fnt",
+        "assets/fonts/ninja.png"
+      ]
+    ]
+  ],
+  "tilemapTiledJSON": [
+    [
+      "TILEMAP_super_mario",
+      "assets/tilemaps/super_mario.json"
+    ],
+    [
+      "TILEMAP_0001_Typical_top_down",
+      "assets/tilemaps/test_tilemap/tiled/0001_Typical_top_down.json"
+    ]
+  ],
+  "spritesheet": [
+    [
+      "IMAGE_eyes",
+      "assets/images/eyes.png",
+      {
+        "frameWidth": 10,
+        "frameHeight": 10,
+        "startFrame": 0,
+        "endFrame": 8
+      }
+    ]
+  ]
+}

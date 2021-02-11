@@ -6,7 +6,7 @@ let app = express();
 
 createPhaserAssets()
 
-app.use('/', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/src'));
 
 app.get('/',function(req, res){
     res.sendFile('index.html');

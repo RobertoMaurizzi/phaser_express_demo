@@ -1,2 +1,24 @@
+# Application specific files
+/dist/assets/assets.js     # this file will be recreated on run so it shouldn't be in git
+
+# standard directories
 /node_modules
-/public/assets/assets.js
+/dist
+
+# Generic files
+*.DS_Store
+.vscode
+.settings/
+.node_repl_history
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.Trash-*
+.dropbox
+.dropbox.attr
+.dropbox.cache
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
