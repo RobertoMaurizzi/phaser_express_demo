@@ -66,6 +66,54 @@ to do that AND also easily add more libraries, process my code so that it can ru
 cleanup the code so that it's smaller (and obfuscate it too) and eventually enable me to add other functionality
 like image optimization, application packaging and more.
 
+
+What's in the package
+---------------------
+
+In this template you have the following directories:
+
+  * `src/`: it contains your code. You can use `import` and you can import JS and css files installed
+    with `npm install`. You normally edit files and add assets etc. here, and if you run the Webpack dev
+    server (see below) they'll be processed and served on http://localhost:8080 with so-called hot-reload
+    (if you save a file, your browser page ~~will~~ should reload automatically and only for the parts
+    you changed).  When you want to 'ship' a version of your game, Webpack's `build` command will create
+    an optimized 'production' version of the game inside...
+  * `dist/`: contains the 'final' version of the game, with the code transpiled to a more compatible
+    version of JS, packed together few files instead of one per module, minified, obfuscated, with assets
+    copied over from `src/assets` , with the JSON file describing them and possibly more things like image
+    optimization if you add other Webpack plugins.
+    This is the directory you can upload to a hosting provider to have them serve your game to players over
+    the internet
+  * `webpack/`: contains Webpack's configuration files
+  * `express/`: contains a server.js that creates a very simple web server that will serve your game from
+    the `dist` folder on http://localhost:3000 . This is the directory where you might want to add more code to
+    implement a server side leaderboard, player chat, multiplayer and other "game server" functionality.
+  * `package.json`: describes what's inside this directory: the name of the project, version, its authors,
+    webpages, what commands it can accept, what are the necessary *dependencies* to develop and build it,
+    configurations for additional Javascript dev utilities and possibly more.
+  * `node_modules`: contains all the Javascript modules the game is using, like Phaser itself, plus Express
+    and of course all their dependencies, that can be [quite a lot...][1]
+
+[1]: <https://raw.githubusercontent.com/RobertoMaurizzi/phaser_express_demo/master/src/assets/images/node_modules.jpg> "heaviest things in the universe"
+
+Wait a second... it's :8080 or :3000?
+-------------------------------------
+
+Well... it depends. If you're developing the game, you should run Webpack development server with `npm run dev`
+so that you can load your game in a browser, debug it seeing non-minified JS code and have your assets updated
+when you change or add one. This Dev Web server runs on http://localhost:8080
+
+If you've already built your game with `npm run build` you can serve it on your computer and maybe your local
+network by running `npm run express`. Like you could with any other local webserver you might run on your
+computer if it's able to serve the `dist` directory. This is only marginally useful *unless* you get serious
+and add server-side functions to your game that connect to that Express server: in that case *the code in*
+*your game will connect to, for example,* `http://localhost/api` *and read data, or send high scores* to the
+Node/Express code you've written in `express/server.js` or other files in that directory.
+Other files or modules that, this being a server application running Node, you'll have to make available to
+your code using `require()` instead of `import`, *because Javascript ecosystem madhouse*
+That's the reason Phaser uses `require()` in its code: it needs to be able to run on a Node server so you can
+write game servers that run synchronized games.
+
 Install it all
 --------------
 
@@ -73,16 +121,37 @@ Node, Webpack and much of the tooling of the aforementioned 'Javascript *madhous
 line implementation of the Javascript virtual machine that also powers Chrome, called V8. Node also enable us to
 search, install into our project and update Javascript libraries that we need for our game.
 
-Since this is a template I've already set up the necessary configuration (actually, @yandeu did) that mostly lives
-inside the file `package.json`: here you'll see what commands are available for this project in the `script` section
-the dependencies that are required to run the final code, the dependencies that are necessary to work on the code
-while developing and general information about authors, name of the game/application, etc.
+If things in JS were sane, you could [install Node from here][2] picking the LTS version... but I'm still using
+the *previous* LTS version 12.x *because work reasons*. If you download the LTS and nothing works, it's probably
+because they released a new and shiny version that broke compatibility with some older piece of software that
+has been included here.
 
-For more information check: ....
+[2]: <https://nodejs.org/en/download/>
 
+Since this is a template I've already set up the necessary configuration (actually, @yandeu did most of it) after
+Node is installed you can directly try to install all the dependencies then "run it" (see below).
 
-webpack configuration files
----------------------------
+Running it
+----------
+
+To test the demo application clone the repository, then inside the newly created directory, run `npm install`
+to install the packages listed in `package.json`.
+
+You can then run:
+
+  * `npm run serve` to start the local Webpack Development server that will, in one go, pre-process your JS, serve
+                  your game and update everything every time you change your code or change/rename/create a new asset
+
+  * `npm run build` to process and package all files from `src/` into `dist`. This `dist` folder can be uploaded as is
+                  on any remote server able to serve HTTP files. No Node support required (or PHP or...)
+
+  * `npm run start` to start the server on your system, on port 3000 (http://127.0.0.1:3000)
+  * `npm run recreate` to recreate the asset.js file after the server is started (from another shell)
+
+More details
+------------
+
+### webpack configuration files
 
 Webpack is a Node application composed by a main program plus many (many many many) plugins. Its configuration is
 usually a Javascript file called `webpack.js` but in this template it was chosen to split it in multiple file,
@@ -90,12 +159,11 @@ mostly because we want to do different things to the file depending on if we're 
 (development) or we're ready to ship a final version for our users (production). There is a common file that,
 based on the use of the code it runs on, will include the dev or production file.
 
-phaser-assets-webpack-plugin
-----------------------------
+### phaser-assets-webpack-plugin
 
 The configuration for the plugin is in the `webpack/webpack.common.js` file and it looks like this:
 
-```JSON
+```javascript
     plugins: [
         new PhaserAssetsWebpackPlugin(
             [
@@ -137,26 +205,11 @@ a single loop:
 
 ```
 
+Acknowledgements
+----------------
 
-Running it
-----------
+Javascript import code in `assets.js` adapted from a PHP example written by Naveed Rehman you can find at https://github.com/naveedurrehman/PhaserAssetsLoader
 
-To test the demo application clone the repository, then inside the newly created directory, run `npm install`
-to install the packages listed in `package.json`.
+Express support taken from https://github.com/nazimboudeffa/phaser-express
 
-You can then run:
-
-  * `npm run serve` to start the local Webpack Development server that will, in one go, pre-process your JS, serve
-                  your game and update everything every time you change your code or change/rename/create a new asset
-
-  * `npm run build` to process and package all files from `src/` into `dist`. This `dist` folder can be uploaded as is
-                  on any remote server able to serve HTTP files. No Node support required (or PHP or...)
-
-  * `npm run start` to start the server on your system, on port 3000 (http://127.0.0.1:3000)
-  * `npm run recreate` to recreate the asset.js file after the server is started (from another shell)
-
-## Acknowledgements
-
-Adapted from a PHP example written by Naveed Rehman you can find at https://github.com/naveedurrehman/PhaserAssetsLoader
-
-Created from https://github.com/nazimboudeffa/phaser-express but only because I didn't notice it was still using Phaser2 :D
+Transformed in a Webpack-enable system by merging the template at https://github.com/yandeu/phaser-project-template-es6
