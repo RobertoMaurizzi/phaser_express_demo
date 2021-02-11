@@ -10,24 +10,20 @@ class scnExample extends Phaser.Scene {
     }
 
     preload() {
-        //Calling the function in PhaserAssetsLoader.php?folder=assets
+        //Calling the function converted from PHP would be done here like this
         // PhaserAssetsLoader_assets(this);
-
-        // this.load.tilemapTiledJSON('map', 'assets/tilemaps/super-mario.json');
-        // this.load.image('tiles', 'assets/images/mario_tiles.png');
 
         let scene = this
         Object.keys(assets).forEach(methodName => {
             assets[methodName].forEach(args => {
                 // bitmapFont needs to rework packing and ordeer of its args
                 if (methodName === 'bitmapFont') args = [args[0], args[1][1], args[1][0]]
+                // open the browser's console to check the assets' names
                 console.log(methodName, args.join(','))
                 scene.load[methodName](...args)
             })
         })
 
-        // game.load.tilemap('map', 'images/test11.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.image('tiles', 'images/tilesets.png');
     }
 
     create() {
@@ -39,7 +35,6 @@ class scnExample extends Phaser.Scene {
 
         // Map size
         layer.width = 400;
-
 
         //Showing images
         this.add.image(250, 250, 'IMAGE_circle1');
