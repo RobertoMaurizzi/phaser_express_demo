@@ -38,10 +38,6 @@
     [
       "TILEMAP_super_mario",
       "assets/tilemaps/super_mario.json"
-    ],
-    [
-      "TILEMAP_0001_Typical_top_down",
-      "assets/tilemaps/test_tilemap/tiled/0001_Typical_top_down.json"
     ]
   ],
   "spritesheet": [

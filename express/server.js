@@ -1,12 +1,14 @@
 /* global process __dirname */
+const path = require( "path" );
 const express = require('express');
 const { createPhaserAssets } = require('./create-phaser-assets.js')
-let app = express();
-
+let app = express()
+let basepath = path.resolve(__dirname, '../dist')
 
 createPhaserAssets()
 
-app.use('/', express.static(__dirname + '/src'));
+console.log(basepath)
+app.use('/', express.static(basepath))
 
 app.get('/',function(req, res){
     res.sendFile('index.html');

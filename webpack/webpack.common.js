@@ -38,7 +38,6 @@ module.exports = {
                 { type: 'html', prefix: 'HTML_', dir: 'assets/htmls', rule: /^\w+\.(html|htm)$/ },
                 { type: 'bitmapFont', prefix: 'FONT_', dir: 'assets/fonts', rule: /^\w+\.(fnt|png)$/ },
                 { type: 'tilemapTiledJSON', prefix: 'TILEMAP_', dir: 'assets/tilemaps', rule: /^\w+\.(json)$/ },
-                { type: 'tilemapTiledJSON', prefix: 'TILEMAP_', dir: 'assets/tilemaps/test_tilemap/tiled/', rule: /^\w+\.(json)$/ },
             ],
             { documentRoot: './src', output: './src/assets.json' }
         ),
